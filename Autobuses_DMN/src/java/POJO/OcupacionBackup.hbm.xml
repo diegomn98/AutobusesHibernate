@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 06-mar-2019 15:50:21 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="POJO.OcupacionBackup" table="ocupacion_backup" catalog="bd_autobuses_dmn" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="compraBackup" class="POJO.CompraBackup" fetch="select">
+            <column name="id_compra" not-null="true" />
+        </many-to-one>
+        <many-to-one name="viajeroBackup" cascade="save-update" class="POJO.ViajeroBackup" fetch="select">
+            <column name="id_viajero" not-null="true" />
+        </many-to-one>
+        <property name="numeroAsiento" type="int">
+            <column name="numeroAsiento" not-null="true" />
+        </property>
+        <property name="importe" type="float">
+            <column name="importe" precision="12" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

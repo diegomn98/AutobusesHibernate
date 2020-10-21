@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 06-mar-2019 15:50:21 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="POJO.CompraBackup" table="compra_backup" catalog="bd_autobuses_dmn" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tarjeta" class="POJO.Tarjeta" fetch="select">
+            <column name="id_tarjeta" not-null="true" />
+        </many-to-one>
+        <many-to-one name="viajeBackup" class="POJO.ViajeBackup" fetch="select">
+            <column name="id_viaje" not-null="true" />
+        </many-to-one>
+        <property name="fechaPago" type="date">
+            <column name="fechaPago" length="10" not-null="true" />
+        </property>
+        <property name="importe" type="float">
+            <column name="importe" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="numeroViajeros" type="int">
+            <column name="numeroViajeros" not-null="true" />
+        </property>
+        <property name="localizador" type="string">
+            <column name="localizador" length="50" not-null="true" unique="true" />
+        </property>
+        <set name="ocupacionBackups" cascade="save-update" table="ocupacion_backup" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_compra" not-null="true" />
+            </key>
+            <one-to-many class="POJO.OcupacionBackup" />
+        </set>
+    </class>
+</hibernate-mapping>
